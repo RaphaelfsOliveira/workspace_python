@@ -8,4 +8,4 @@ class Televisao:
         self.canal += 1
 
 
-
+tv_sala = Televisao()
