@@ -7,7 +7,13 @@
 # você pode ficar dormindo quando é feriado ou não é dia semana
 # retorne True ou False conforme você vá dormir ou não
 def dormir(dia_semana, feriado):
-  return 
+    if dia_semana:
+        if feriado:
+            return True
+        else:
+            return False
+    else:
+        return True
 
 # B. alunos_problema
 # temos dois alunos a e b
@@ -15,7 +21,12 @@ def dormir(dia_semana, feriado):
 # temos problemas quando ambos estão sorrindo ou ambos não estão sorrindo
 # retorne True quando houver problemas
 def alunos_problema(a_sorri, b_sorri):
-  return 
+    if a_sorri and b_sorri:
+        return True
+    elif not a_sorri and not b_sorri:
+        return True
+    else:
+        return False
 
 # C. soma_dobro
 # dados dois números inteiros retorna sua soma
@@ -23,7 +34,10 @@ def alunos_problema(a_sorri, b_sorri):
 # soma_dobro(1, 2) -> 3
 # soma_dobro(2, 2) -> 8
 def soma_dobro(a, b):
-  return
+    if a == b:
+        return a * 4
+    else:
+        return a + b
 
 # D. diff21
 # dado um inteiro n retorna a diferença absoluta entre n e 21
@@ -32,7 +46,10 @@ def soma_dobro(a, b):
 # diff21(25) -> 8
 # dica: abs(x) retorna o valor absoluto de x
 def diff21(n):
-  return 
+    if n > 21:
+        return abs(n - 21) * 2
+    else:
+        return abs(n - 21) 
 
 # E. papagaio
 # temos um papagaio que fala alto
@@ -40,7 +57,10 @@ def diff21(n):
 # temos problemas se o papagaio estiver falando
 # antes da 7 ou depois das 20
 def papagaio(falando, hora):
-  return
+  if falando and ( hora < 7 or hora > 20 ):
+      return True
+  else:
+      return False
 
 # F. dez
 # dados dois inteiros a e b
