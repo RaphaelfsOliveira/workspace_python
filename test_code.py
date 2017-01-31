@@ -106,18 +106,7 @@ def apaga(s, n):
 # troca('a') -> 'a'
 # troca('ab') -> 'ba'
 def troca(s):
-  word = str()
-  if len(s) <= 1:
-      return s
-  else:
-      for l in range(len(s)):
-          if l == 0:
-              word += s[len(s) - 1]
-          elif l == len(s) - 1:
-              word += s[0]
-          else:
-              word += s[l]
-  return word
+  return
 
 # Provided simple test() function used in main() to print
 # what each function returns vs. what it's supposed to return.
