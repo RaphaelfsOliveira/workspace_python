@@ -3,26 +3,42 @@ import urllib.request #modulo que permite conversar com a internet
 pagina = urllib.request.urlopen(
     'http://www.prezunic.com.br/Ofertas.aspx?tipo=Oferta%20do%20dia&&Area=Ofertas')
 text = pagina.read().decode('utf8')
-print(text)
+#print(text)
 preco = ''
-
-prod = dict()
+prod = ''
+produto = dict()
+lista_preco = []
+lista_prod = []
 
 for c in '!"#%&\'()*+-/:;<=>?@[\\]^_`{|}~':
     text = text.replace(c, ' ')
 
-text = text.rsplit()
-i = 0
+text = text.split()
+#print(text)
+for t in text:
+    if 'R$' in t:
+        produto['sem produto'] = t
+    if 'nomeProd' in t:
+        produto[t] = 'sem preco'
+    #produto[prod] = preco
 
 for t in text:
-    if t.startswith('R$'):
-        prod[i] = t[2:]
-    if t.startswith('nomeProd'):
-        prod[t]
-    i += 1
+    if 'R$' in t:
+        lista_preco.append(t)
+    if  t.startswith('nomeProd'):
+        #i = text.index(t)
+        #t = text[i+1] + ' ' + text[i+2] + ' ' + text[i+3]
+        lista_prod.append(t)
 
-for ch in prod:
-    print(prod, '->', prod[ch])
+
+for i in range(len(lista_prod)):
+    print(lista_prod[i], lista_preco[i])
+
+for t in text:
+    if t.startswith('nomeP'): print(t)
+    if 'R$' in t: print(t)
+
+print(produto)
 
 
 
@@ -33,7 +49,7 @@ preco.append(text[i+2:i+8])
 while text.rfind('>R$') > text.find('>R$', i):
     i = text.find('>R$', i) + 1
     preco.append(text[i+1:i+8])
-    
+
 #preco = text[i+3:i+7]
 print('Preco: ', preco)
 '''
