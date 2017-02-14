@@ -17,16 +17,19 @@ def compress_file(path, src_arq):
 
 if __name__ == "__main__":
 
-    path = 'C:\\Users\\nameuser\\bkp\\ano\\'
-    src_arq = ''
+    path = 'Z:\\backup\\'
+    src_arq = 'Z:\\backup\\'
 
     # compress all files in dir
     # compress_file(path, file)
     for dit in os.listdir(path):
         print(dit)
+        compress_file(path, dit)
+        '''
         for files in os.listdir(path + dit + '\\'):
+            #print(files)
             compress_file(path + dit + '\\', files)
-            
+      '''
             
             
         
