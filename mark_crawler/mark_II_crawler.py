@@ -22,15 +22,13 @@ def search_urls(url, link_i, link_f):
 
 	for word in text:
 
-		if  link_i.lower() in word.lower():
-			cap = True
-
-		if link_f.lower() in word.lower():
-			cap = False
-
-		if cap and 'href' in word.lower():
-			l_type[word[word.find('.br/') + len('br/'):].replace('"', '')]\
-			 = word.replace('href=', '').replace('"', '')
+		if 'href' in word.lower():
+			l_word = word.replace('href=', '').replace('"', '')
+			p_word = parse.urlparse(l_word)
+			l_type[p_word.path] = p_word.geturl()
+			#print('URL: ', p_word.geturl())
+			
+			
 
 	return l_type
 
@@ -43,7 +41,7 @@ if __name__ == '__main__':
 	for key in dictt:
 		print('chave [ %s ] = %s' %(key, dictt[key]))
 		print()
-
+'''
 	for key in dictt.values():
 
 		url = key
@@ -52,6 +50,6 @@ if __name__ == '__main__':
 	for key in dict2:
 		print('chave [ %s ] = %s' %(key, dict2[key]))
 		print()
-
+'''
 #print(dictt.values())
 
