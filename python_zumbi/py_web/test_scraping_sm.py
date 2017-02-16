@@ -39,17 +39,3 @@ for t in text:
     if 'R$' in t: print(t)
 
 print(produto)
-
-
-
-'''
-i = text.find('>R$')
-preco.append(text[i+2:i+8])
-
-while text.rfind('>R$') > text.find('>R$', i):
-    i = text.find('>R$', i) + 1
-    preco.append(text[i+1:i+8])
-
-#preco = text[i+3:i+7]
-print('Preco: ', preco)
-'''
