@@ -40,8 +40,7 @@ def search_urls(url, i_filter, f_filter):
 
 
 if __name__ == '__main__':
-	import operator
-
+	
 	url = 'http://www.epocacosmeticos.com.br/'
 	i_filter = 'Departamentos'
 	f_filter = 'selecao'
