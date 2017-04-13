@@ -1,0 +1,13 @@
+ACME Inc.               Uso do espaço em disco pelos usuários
+------------------------------------------------------------------------
+Nr.  Usuário        Espaço utilizado     % do uso
+
+1    alexandre               434.9935426712036 MB    16.85%
+2    anderson               1187.990623474121 MB    46.02%
+3    antonio              117.73725128173828 MB    4.56%
+4    carlos               87.03001117706299 MB    3.37%
+5    cesar              0.9417133331298828 MB    0.04%
+6    rosemary                752.884030342102 MB    29.16%
+
+Espaço total ocupado: 2581.58 MB
+Espaço medio ocupado: 430.26 MB
