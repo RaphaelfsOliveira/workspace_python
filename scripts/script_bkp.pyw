@@ -58,23 +58,23 @@ def bkp_database(srv, db_bkp, path_bkp_db):
 if __name__ == "__main__":
 
     # database bkp Refeitorio    
-    db_bkp = 'bkp' #database for backup
-    path_bkp_db = 'C:/Program Files/Microsoft SQL Server/MSSQL10_50.SQLEXPRESS/MSSQL/backup/bkp.bak' # backup stay here
-    srv = 'SERVER\SQLEXPRESS' #database server
+    db_bkp = 'XXXX_XX' #database for backup
+    path_bkp_db = 'C:/Program Files/Microsoft SQL Server/MSSQL10_50.SQLEXPRESS/MSSQL/Backup/backup/XXX.bak' # backup stay here
+    srv = 'XXXXX\SQLEXPRESS' #database server
     bkp_database(srv, db_bkp, path_bkp_db)
 
 
     #armazenar backup Refeitorio
-    path = 'Z:\\backup\\'
-    dst_path = 'C:\\Users\\nameuser\\backup\\'
-    src_arq = 'Ref.bak'
+    path = 'Y:\\backup\\'
+    dst_path = 'D:\\backup\\'
+    src_arq = 'XX.bak'
     make_dir_bkp(path, dst_path, compress_rename_file(path, dst_path, src_arq))
 
 
     #armazenar backup CMnet
-    path = 'Y:\\Backup Full\\'
-    dst_path = 'Y:\\Backup Compact\\'
-    src_arq = 'bkp.bak'
+    path = 'D:\\Backup Full\\'
+    dst_path = 'D:\\Backup Compact\\'
+    src_arq = 'XX.bak'
     make_dir_bkp(path, dst_path, compress_rename_file(path, dst_path, src_arq))
     
 

@@ -2,10 +2,13 @@
 
 try:
     lista = []
-    lista.append(int('dsdsad'))
-except IndexError:
+    lista.append(int('1'))
+except (IndexError, ValueError) as excessao:
+    print(excessao)
     print('erro')
-except ValueError:
-    print('deu erro de valor')
+else:
+    print('sem excessoes')
+except:
+    print('Deu erro!!')
 finally:
     print('Chegamos ao final')

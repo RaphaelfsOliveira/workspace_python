@@ -14,4 +14,3 @@ for d in data['value']:
     print(d)
 print()
 print(data)
-
