@@ -152,6 +152,22 @@ def echo_photo(msg):
     print()
     print('MSG Photo: \n', msg.photo)
 
+    save = open('test.txt', 'a')
+    for file_id in msg.photo:
+        print(file_id)
+        #save.write(file_id)
+    save.close()
+
+    '''
+        file_info = bot.get_photo(file_id)
+        i = file_info.file_path.find('/')
+        file_name = file_info.file_path[i+1::]
+        file_test = urllib.request.urlopen('https://api.telegram.org/file/bot{0}/{1}'.format(TOKEN, file_info.file_path)).read()
+        file_save = open(file_name, 'wb')
+        file_save.write(file_test)
+        file_save.close()
+    '''
+
 
 
 
