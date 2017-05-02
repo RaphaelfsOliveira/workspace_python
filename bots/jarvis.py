@@ -140,9 +140,11 @@ def echo_document(msg):
     except Exception as e:
         print(e)
 
+
 @bot.message_handler(func=lambda msg: True)
 def echo_text(msg):
     print('\nFunc = ALL Msgs: ', msg.text, '\n\n', msg)
+
 
 @bot.message_handler(content_types=['photo'], func=lambda msg: True)
 def echo_text(msg):
