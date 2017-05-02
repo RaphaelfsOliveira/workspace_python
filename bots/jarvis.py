@@ -1,11 +1,12 @@
 import telebot
 import configparser
 import requests
+import urllib.request
 
 #config Jarvis
 config = configparser.ConfigParser()
 config.read_file(open('jarvis_config.ini'))
-TOKEN = config['DEFAULT']['token'] 
+TOKEN = config['DEFAULT']['token']
 
 #start Jarvis
 bot = telebot.TeleBot(TOKEN)
@@ -123,19 +124,31 @@ def echo_document(msg):
         #ID = msg.message_id
         #photo = bot.get_file(document.file_id)
         file_info = bot.get_file(msg.document.file_id)
-        file = requests.get('https://api.telegram.org/file/bot{0}/{1}'.format(TOKEN, file_info.file_path))
+        i = file_info.file_path.find('/')
+        file_name = file_info.file_path[i+1::]
+        #file = requests.get('https://api.telegram.org/file/bot{0}/{1}'.format(TOKEN, file_info.file_path))
+        file_test = urllib.request.urlopen('https://api.telegram.org/file/bot{0}/{1}'.format(TOKEN, file_info.file_path)).read()
+        file_save = open(file_name, 'wb')
+        file_save.write(file_test)
+        file_save.close()
         print('INFO: ', file_info)
         print('FILE PATH: ', file_info.file_path)
-        print(file)
-        arq = open(file, 'w')
-        arq.close()
+        #print(file)
+        #arq = open(file, 'w')
+        #arq.close()
 
     except Exception as e:
         print(e)
 
 @bot.message_handler(func=lambda msg: True)
 def echo_text(msg):
-    print('\nFunc = Post Text: ', msg.text, '\n\n', msg)
+    print('\nFunc = ALL Msgs: ', msg.text, '\n\n', msg)
+
+@bot.message_handler(content_types=['photo'], func=lambda msg: True)
+def echo_text(msg):
+    print('\nFunc = PHOTO: ', msg.text, '\n\n', msg)
+    print()
+    print('MSG Photo: \n', msg.photo)
 
 
 
