@@ -147,7 +147,7 @@ def echo_text(msg):
 
 
 @bot.message_handler(content_types=['photo'], func=lambda msg: True)
-def echo_text(msg):
+def echo_photo(msg):
     print('\nFunc = PHOTO: ', msg.text, '\n\n', msg)
     print()
     print('MSG Photo: \n', msg.photo)
