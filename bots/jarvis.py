@@ -1,8 +1,15 @@
 import telebot
+import configparser
 import requests
 
-TOKEN = '360549035:AAHgK_pxSBy2tOIzmuI2hOELKjecn1a94lU'
+#config Jarvis
+config = configparser.ConfigParser()
+config.read_file(open('jarvis_config.ini'))
+TOKEN = config['DEFAULT']['token'] 
+
+#start Jarvis
 bot = telebot.TeleBot(TOKEN)
+
 #file_info = bot.get_file(file_id=)
 #file = requests.get('https://api.telegram.org/file/bot{0}/{1}'.format(TOKEN, file_info.file_path))
 
@@ -35,9 +42,12 @@ def dominar_mundo(msg):
 @bot.message_handler(commands=['add'])
 def add_post(msg):
     print('\nFunc = /add: ', msg.text, '\n')
-    markup = telebot.types.ForceReply(selective=True)
-    bot.send_message(msg.chat.id, "Titulo do Evento:", reply_markup=markup)
-    bot.register_next_step_handler(msg, post_title)
+    try:
+        markup = telebot.types.ForceReply(selective=True)
+        bot.send_message(msg.chat.id, "Titulo do Evento:", reply_markup=markup)
+        bot.register_next_step_handler(msg, post_title)
+    except Exception as error:
+        print(error)
 
 def post_title(msg): #recebe o titulo do evento na msg
     print('\nFunc = Post Title: ', msg.text, '\n', msg)
@@ -102,16 +112,30 @@ def reply_name(msg):
 '''
 
 
-@bot.message_handler(content_types=['image'], func=lambda msg: True)
-def echo_all(msg):
+@bot.message_handler(content_types=['document'], func=lambda msg: True)
+def echo_document(msg):
     try:
         print()
         print('Func = Todas as Mensagens: ', msg.text)
-        print()
-        print(msg)
+        print('JSON full: ', msg)
+        print('KEY Document: ', msg.document)
+        print('KEY Document.fileID: ', msg.document.file_id)
+        #ID = msg.message_id
+        #photo = bot.get_file(document.file_id)
+        file_info = bot.get_file(msg.document.file_id)
+        file = requests.get('https://api.telegram.org/file/bot{0}/{1}'.format(TOKEN, file_info.file_path))
+        print('INFO: ', file_info)
+        print('FILE PATH: ', file_info.file_path)
+        print(file)
+        arq = open(file, 'w')
+        arq.close()
+
     except Exception as e:
         print(e)
 
+@bot.message_handler(func=lambda msg: True)
+def echo_text(msg):
+    print('\nFunc = Post Text: ', msg.text, '\n\n', msg)
 
 
 
