@@ -162,8 +162,8 @@ def echo_photo(msg):
     print(msg.photo[0].file_id)
     print(msg.photo[1].file_id)
 
-    print(msg.photo.file_id)
-    file_info = bot.get_file(msg.photo[1].file_id)
+    #print(msg.photo.file_id)
+    file_info = bot.get_file(msg.photo[3].file_id)
     #file = requests.get('https://api.telegram.org/file/bot{0}/{1}'.format(TOKEN, file_info.file_path))
     #print('Return FILE: ', file)
     print('File INFO: ', file_info)
