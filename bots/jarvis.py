@@ -154,19 +154,19 @@ def echo_photo(msg):
 
     #save = open('test.txt', 'a')
     i = 0
-    photo_size_max = 0
+    size_max = 0
     photo_download = None
     for photo in msg.photo:
 
         print('MSG Photo [%i]: %s - file size: %s' %(i, photo, photo.file_size))
-        if photo.file_size > photo_size_max:
-            photo_size_max = photo.file_size
+        if photo.file_size > size_max:
+            size_max = photo.file_size
             photo_download = photo
         print(photo.height, photo.width, photo.file_size)
         i += 1
         #save.write(file_id)
     #save.close()
-    print('Photo MAX: ', photo_size_max)
+    print('Photo MAX: ', size_max)
     print('Photo to Download: ', photo_download)
 
     #print(msg.photo.file_id)
