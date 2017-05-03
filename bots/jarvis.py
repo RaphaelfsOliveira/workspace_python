@@ -154,19 +154,26 @@ def echo_photo(msg):
 
     #save = open('test.txt', 'a')
     i = 0
-    for file_id in msg.photo:
-        print('MSG Photo [%i]: %s' %(i, file_id))
+    photo_size_max = 0
+    photo_download = None
+    for photo in msg.photo:
+
+        print('MSG Photo [%i]: %s - file size: %s' %(i, photo, photo.file_size))
+        if photo.file_size > photo_size_max:
+            photo_size_max = photo.file_size
+            photo_download = photo
+        print(photo.height, photo.width, photo.file_size)
         i += 1
         #save.write(file_id)
     #save.close()
-    print(msg.photo[0].file_id)
-    print(msg.photo[1].file_id)
+    print('Photo MAX: ', photo_size_max)
+    print('Photo to Download: ', photo_download)
 
     #print(msg.photo.file_id)
     file_info = bot.get_file(msg.photo[3].file_id)
     #file = requests.get('https://api.telegram.org/file/bot{0}/{1}'.format(TOKEN, file_info.file_path))
     #print('Return FILE: ', file)
-    print('File INFO: ', file_info)
+    #print('File INFO: ', file_info)
     i = file_info.file_path.find('/')
     file_name = file_info.file_path[i+1::]
     #file = requests.get('https://api.telegram.org/file/bot{0}/{1}'.format(TOKEN, file_info.file_path))
