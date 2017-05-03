@@ -1,7 +1,7 @@
 import telebot
 import configparser
-import requests
 import urllib.request
+import requests
 
 #config Jarvis
 config = configparser.ConfigParser()
@@ -157,6 +157,22 @@ def echo_photo(msg):
         print(file_id)
         #save.write(file_id)
     save.close()
+    print(msg.photo[0].file_id)
+    print(msg.photo[1].file_id)
+
+    file_info = bot.get_file(msg.photo[1].file_id)
+    #file = requests.get('https://api.telegram.org/file/bot{0}/{1}'.format(TOKEN, file_info.file_path))
+    #print('Return FILE: ', file)
+    print('File INFO: ', file_info)
+    i = file_info.file_path.find('/')
+    file_name = file_info.file_path[i+1::]
+    #file = requests.get('https://api.telegram.org/file/bot{0}/{1}'.format(TOKEN, file_info.file_path))
+    file_test = urllib.request.urlopen('https://api.telegram.org/file/bot{0}/{1}'.format(TOKEN, file_info.file_path)).read()
+    file_save = open(file_name, 'wb')
+    file_save.write(file_test)
+    file_save.close()
+
+
 
     '''
         file_info = bot.get_photo(file_id)
