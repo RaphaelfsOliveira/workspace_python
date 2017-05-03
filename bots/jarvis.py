@@ -152,14 +152,17 @@ def echo_photo(msg):
     print()
     print('MSG Photo: \n', msg.photo)
 
-    save = open('test.txt', 'a')
+    #save = open('test.txt', 'a')
+    i = 0
     for file_id in msg.photo:
-        print(file_id)
+        print('MSG Photo [%i]: %s' %(i, file_id))
+        i += 1
         #save.write(file_id)
-    save.close()
+    #save.close()
     print(msg.photo[0].file_id)
     print(msg.photo[1].file_id)
 
+    print(msg.photo.file_id)
     file_info = bot.get_file(msg.photo[1].file_id)
     #file = requests.get('https://api.telegram.org/file/bot{0}/{1}'.format(TOKEN, file_info.file_path))
     #print('Return FILE: ', file)
