@@ -11,11 +11,27 @@ TOKEN = config['DEFAULT']['token']
 #start Jarvis
 bot = telebot.TeleBot(TOKEN)
 
-#file_info = bot.get_file(file_id=)
-#file = requests.get('https://api.telegram.org/file/bot{0}/{1}'.format(TOKEN, file_info.file_path))
 
+#Global variables
+API_URL = 'https://api.telegram.org/file/bot{0}/{1}'
 event_title, event_text = '', ''
 
+
+'''
+Global functions
+file_download -> download files
+'''
+def file_download(file_id):
+    file_info = bot.get_file(file_id)
+    i = file_info.file_path.find('/')
+    #file_name = file_info.file_path[i+1::]
+    file_down = urllib.request.urlopen(API_URL.format(TOKEN, file_info.file_path)).read()
+    file_save = open(file_info.file_path[i+1::], 'wb')
+    file_save.write(file_down)
+    file_save.close()
+
+
+#start filters
 @bot.message_handler(commands=['start', 'help'])
 def send_welcome(msg):
     username = msg.from_user.first_name
@@ -84,6 +100,40 @@ def post_photo(msg):  #recebe as fotos do evento
     except Exception as error:
         print('\nPhotal Error: esqueceram de tirar as fotos ... \n')
 
+
+@bot.message_handler(content_types=['document'], func=lambda msg: True)
+def echo_document(msg):
+    try:
+        print()
+        print('Func = Todas as Mensagens: ', msg.text)
+        file_download(msg.document.file_id)
+
+    except Exception as e:
+        print(e)
+
+
+@bot.message_handler(content_types=['photo'], func=lambda msg: True)
+def echo_photo(msg):
+    print('\nFunc = PHOTO: ', msg.text, '\n\n', msg)
+    print()
+    print('MSG Photo: \n', msg.photo)
+
+    try:
+        size_max = 0
+        for photo in msg.photo:
+            print('MSG Photo: %s - file size: %s' %(photo, photo.file_size))
+            if photo.file_size > size_max:
+                size_max = photo.file_size
+                photo_download = photo.file_id
+            #print(photo.height, photo.width, photo.file_size)
+
+        print('Photo to Download: ', photo_download)
+        file_download(photo_download)
+
+    except Exception as error:
+        print(error)
+
+
 '''
 @bot.message_handler(func=lambda msg: 'grupo' in msg.text.lower() or\
                                       'canal' in msg.text.lower())
@@ -113,86 +163,12 @@ def reply_name(msg):
 '''
 
 
-@bot.message_handler(content_types=['document'], func=lambda msg: True)
-def echo_document(msg):
-    try:
-        print()
-        print('Func = Todas as Mensagens: ', msg.text)
-        print('JSON full: ', msg)
-        print('KEY Document: ', msg.document)
-        print('KEY Document.fileID: ', msg.document.file_id)
-        #ID = msg.message_id
-        #photo = bot.get_file(document.file_id)
-        file_info = bot.get_file(msg.document.file_id)
-        i = file_info.file_path.find('/')
-        file_name = file_info.file_path[i+1::]
-        #file = requests.get('https://api.telegram.org/file/bot{0}/{1}'.format(TOKEN, file_info.file_path))
-        file_down = urllib.request.urlopen('https://api.telegram.org/file/bot{0}/{1}'.format(TOKEN, file_info.file_path)).read()
-        file_save = open(file_name, 'wb')
-        file_save.write(file_down)
-        file_save.close()
-        print('INFO: ', file_info)
-        print('FILE PATH: ', file_info.file_path)
-        #print(file)
-        #arq = open(file, 'w')
-        #arq.close()
-
-    except Exception as e:
-        print(e)
-
-
 @bot.message_handler(func=lambda msg: True)
 def echo_text(msg):
     print('\nFunc = ALL Msgs: ', msg.text, '\n\n', msg)
 
 
-@bot.message_handler(content_types=['photo'], func=lambda msg: True)
-def echo_photo(msg):
-    print('\nFunc = PHOTO: ', msg.text, '\n\n', msg)
-    print()
-    print('MSG Photo: \n', msg.photo)
 
-    #save = open('test.txt', 'a')
-    i = 0
-    size_max = 0
-    photo_download = None
-    for photo in msg.photo:
-
-        print('MSG Photo [%i]: %s - file size: %s' %(i, photo, photo.file_size))
-        if photo.file_size > size_max:
-            size_max = photo.file_size
-            photo_download = photo
-        print(photo.height, photo.width, photo.file_size)
-        i += 1
-        #save.write(file_id)
-    #save.close()
-    print('Photo MAX: ', size_max)
-    print('Photo to Download: ', photo_download)
-
-    #print(msg.photo.file_id)
-    file_info = bot.get_file(msg.photo[3].file_id)
-    #file = requests.get('https://api.telegram.org/file/bot{0}/{1}'.format(TOKEN, file_info.file_path))
-    #print('Return FILE: ', file)
-    #print('File INFO: ', file_info)
-    i = file_info.file_path.find('/')
-    file_name = file_info.file_path[i+1::]
-    #file = requests.get('https://api.telegram.org/file/bot{0}/{1}'.format(TOKEN, file_info.file_path))
-    file_down = urllib.request.urlopen('https://api.telegram.org/file/bot{0}/{1}'.format(TOKEN, file_info.file_path)).read()
-    file_save = open(file_name, 'wb')
-    file_save.write(file_down)
-    file_save.close()
-
-
-
-    '''
-        file_info = bot.get_photo(file_id)
-        i = file_info.file_path.find('/')
-        file_name = file_info.file_path[i+1::]
-        file_test = urllib.request.urlopen('https://api.telegram.org/file/bot{0}/{1}'.format(TOKEN, file_info.file_path)).read()
-        file_save = open(file_name, 'wb')
-        file_save.write(file_test)
-        file_save.close()
-    '''
 
 
 
