@@ -127,9 +127,9 @@ def echo_document(msg):
         i = file_info.file_path.find('/')
         file_name = file_info.file_path[i+1::]
         #file = requests.get('https://api.telegram.org/file/bot{0}/{1}'.format(TOKEN, file_info.file_path))
-        file_test = urllib.request.urlopen('https://api.telegram.org/file/bot{0}/{1}'.format(TOKEN, file_info.file_path)).read()
+        file_down = urllib.request.urlopen('https://api.telegram.org/file/bot{0}/{1}'.format(TOKEN, file_info.file_path)).read()
         file_save = open(file_name, 'wb')
-        file_save.write(file_test)
+        file_save.write(file_down)
         file_save.close()
         print('INFO: ', file_info)
         print('FILE PATH: ', file_info.file_path)
@@ -170,9 +170,9 @@ def echo_photo(msg):
     i = file_info.file_path.find('/')
     file_name = file_info.file_path[i+1::]
     #file = requests.get('https://api.telegram.org/file/bot{0}/{1}'.format(TOKEN, file_info.file_path))
-    file_test = urllib.request.urlopen('https://api.telegram.org/file/bot{0}/{1}'.format(TOKEN, file_info.file_path)).read()
+    file_down = urllib.request.urlopen('https://api.telegram.org/file/bot{0}/{1}'.format(TOKEN, file_info.file_path)).read()
     file_save = open(file_name, 'wb')
-    file_save.write(file_test)
+    file_save.write(file_down)
     file_save.close()
 
 
