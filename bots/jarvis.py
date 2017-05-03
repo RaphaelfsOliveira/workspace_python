@@ -1,7 +1,6 @@
 import telebot
 import configparser
 import urllib.request
-import requests
 
 #config Jarvis
 config = configparser.ConfigParser()
