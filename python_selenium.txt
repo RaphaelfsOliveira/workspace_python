@@ -1,0 +1,6 @@
+http://pythonclub.com.br/selenium-parte-1.html
+
+http://pythonclub.com.br/selenium-parte-3.html
+
+#Doc
+http://selenium-python.readthedocs.io/installation.html
