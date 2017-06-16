@@ -10,7 +10,6 @@ TOKEN = config['DEFAULT']['token']
 #start Jarvis
 bot = telebot.TeleBot(TOKEN)
 
-
 #Global variables
 API_URL = 'https://api.telegram.org/file/bot{0}/{1}'
 event_title, event_text = '', ''
@@ -167,8 +166,19 @@ def echo_text(msg):
     print('\nFunc = ALL Msgs: ', msg.text, '\n\n', msg)
 
 
+@bot.chosen_inline_handler(func=lambda chosen_inline_result: True)
+def test_chosen(chosen_inline_result):
+    # Process all chosen_inline_result.
+    print('Feedback inline_query: ', chosen_inline_result)
 
-
+@bot.inline_handler(lambda query: query.query == 'text')
+def query_text(inline_query):
+    try:
+        r = types.InlineQueryResultArticle('1', 'Result', types.InputTextMessageContent('Result message.'))
+        r2 = types.InlineQueryResultArticle('2', 'Result2', types.InputTextMessageContent('Result message2.'))
+        bot.answer_inline_query(inline_query.id, [r, r2])
+    except Exception as e:
+        print(e)
 
 
 
