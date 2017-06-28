@@ -13,8 +13,13 @@ if 'win' in sys.platform:
 sys.path.append('C:\\')
 print(sys.path) #retorna listas de pastas onde eu posso procurar arquivos
 
-print(sys.exit) #fecha seu programa
+#fecha seu programa
+print(sys.exit) 
 
-print(sys.modules)
+#mostra os modulos utilizados pelo programa
+print(sys.modules) 
+
+#retorna uma tupla da ultima excessão levantada pelo seu programa
+print(sys.exc_info()) 
 
 
